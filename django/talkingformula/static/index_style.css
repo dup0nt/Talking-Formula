@@ -10,7 +10,7 @@ body{
 
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: #FF1801;
+    background-color: #000000;
     overflow: hidden;
     font-family: formulaonefont;
     position: fixed;
