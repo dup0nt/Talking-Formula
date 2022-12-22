@@ -1,11 +1,9 @@
 CREATE TABLE piloto (
-	pilotoid			 SERIAL,
-	nome				 VARCHAR(512),
-	nacionalidade			 VARCHAR(512),
-	nascimento			 DATE,
-	foto				 VARCHAR(512),
-	equipa_equipaid		 BIGINT NOT NULL,
-	equipa_construtor_construtorid BIGINT NOT NULL,
+	pilotoid	 SERIAL,
+	nome		 VARCHAR(512),
+	nacionalidade VARCHAR(512),
+	nascimento	 DATE,
+	foto		 VARCHAR(512),
 	PRIMARY KEY(pilotoid)
 );
 
@@ -22,6 +20,8 @@ CREATE TABLE corrida (
 	ronda		 SERIAL,
 	nome		 VARCHAR(512) NOT NULL,
 	voltas		 INTEGER,
+	ocorreem		 DATE,
+	horas		 VARCHAR(512) NOT NULL,
 	temperatura	 INTEGER,
 	temperaturacircuito INTEGER,
 	precipitacao	 INTEGER,
@@ -96,7 +96,13 @@ CREATE TABLE equipa (
 	PRIMARY KEY(equipaid,construtor_construtorid)
 );
 
-ALTER TABLE piloto ADD CONSTRAINT piloto_fk1 FOREIGN KEY (equipa_equipaid, equipa_construtor_construtorid) REFERENCES equipa(equipaid, construtor_construtorid);
+CREATE TABLE piloto_equipa (
+	piloto_pilotoid		 INTEGER,
+	equipa_equipaid		 BIGINT,
+	equipa_construtor_construtorid BIGINT,
+	PRIMARY KEY(piloto_pilotoid,equipa_equipaid,equipa_construtor_construtorid)
+);
+
 ALTER TABLE corrida ADD CONSTRAINT corrida_fk1 FOREIGN KEY (epoca_ano) REFERENCES epoca(ano);
 ALTER TABLE corrida ADD CONSTRAINT corrida_fk2 FOREIGN KEY (circuito_circuitoid) REFERENCES circuito(circuitoid);
 ALTER TABLE resultados ADD CONSTRAINT resultados_fk1 FOREIGN KEY (corrida_ronda) REFERENCES corrida(ronda);
@@ -109,4 +115,6 @@ ALTER TABLE noticia ADD CONSTRAINT noticia_fk3 FOREIGN KEY (construtor_construto
 ALTER TABLE noticia ADD CONSTRAINT noticia_fk4 FOREIGN KEY (piloto_pilotoid) REFERENCES piloto(pilotoid);
 ALTER TABLE equipa ADD CONSTRAINT equipa_fk1 FOREIGN KEY (construtor_construtorid) REFERENCES construtor(construtorid);
 ALTER TABLE equipa ADD CONSTRAINT equipa_fk2 FOREIGN KEY (epoca_ano) REFERENCES epoca(ano);
+ALTER TABLE piloto_equipa ADD CONSTRAINT piloto_equipa_fk1 FOREIGN KEY (piloto_pilotoid) REFERENCES piloto(pilotoid);
+ALTER TABLE piloto_equipa ADD CONSTRAINT piloto_equipa_fk2 FOREIGN KEY (equipa_equipaid, equipa_construtor_construtorid) REFERENCES equipa(equipaid, construtor_construtorid);
 
