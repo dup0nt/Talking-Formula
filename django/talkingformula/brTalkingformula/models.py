@@ -11,10 +11,10 @@ from django.db import models
 class Circuito(models.Model):
     circuitoid = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=512, blank=True, null=True)
-    nascimento = models.DateField(blank=True, null=True)
+    criadoem = models.DateField(blank=True, null=True)
     comprimento = models.FloatField(blank=True, null=True)
     curvas = models.IntegerField(blank=True, null=True)
-    foto = models.BinaryField(blank=True, null=True)
+    foto = models.CharField(max_length=512, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -26,8 +26,8 @@ class Comentario(models.Model):
     nome = models.CharField(max_length=80, blank=True, null=True)
     corpo = models.CharField(max_length=2000, blank=True, null=True)
     criadoem = models.DateField(blank=True, null=True)
-    corrida_ronda = models.ForeignKey('Corrida', on_delete=models.CASCADE, db_column='corrida_ronda')
-    noticia_noticiaid = models.ForeignKey('Noticia', on_delete=models.CASCADE, db_column='noticia_noticiaid')
+    corrida_ronda = models.ForeignKey('Corrida', models.DO_NOTHING, db_column='corrida_ronda')
+    noticia_noticiaid = models.ForeignKey('Noticia', models.DO_NOTHING, db_column='noticia_noticiaid')
     noticia_circuito_circuitoid = models.IntegerField()
     noticia_corrida_ronda = models.IntegerField()
     noticia_construtor_construtorid = models.BigIntegerField()
@@ -43,9 +43,8 @@ class Construtor(models.Model):
     construtorid = models.BigAutoField(primary_key=True)
     nome = models.CharField(max_length=512, blank=True, null=True)
     nacionalidade = models.CharField(max_length=512, blank=True, null=True)
-    chefe = models.CharField(max_length=512, blank=True, null=True)
-    chefetecnico = models.CharField(max_length=512, blank=True, null=True)
-    logo = models.BinaryField(blank=True, null=True)
+    logo = models.CharField(max_length=512, blank=True, null=True)
+    criadoem = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -53,7 +52,7 @@ class Construtor(models.Model):
 
 
 class Corrida(models.Model):
-    ronda = models.IntegerField(primary_key=True)
+    ronda = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=512)
     voltas = models.IntegerField(blank=True, null=True)
     temperatura = models.IntegerField(blank=True, null=True)
@@ -61,8 +60,8 @@ class Corrida(models.Model):
     precipitacao = models.IntegerField(blank=True, null=True)
     humidade = models.IntegerField(blank=True, null=True)
     exposicaosolar = models.IntegerField(blank=True, null=True)
-    epoca_ano = models.ForeignKey('Epoca', on_delete=models.CASCADE, db_column='epoca_ano')
-    circuito_circuitoid = models.ForeignKey(Circuito, on_delete=on_delete=models.CASCADE, db_column='circuito_circuitoid')
+    epoca_ano = models.ForeignKey('Epoca', models.DO_NOTHING, db_column='epoca_ano')
+    circuito_circuitoid = models.ForeignKey(Circuito, models.DO_NOTHING, db_column='circuito_circuitoid')
 
     class Meta:
         managed = False
@@ -77,16 +76,31 @@ class Epoca(models.Model):
         db_table = 'epoca'
 
 
+class Equipa(models.Model):
+    equipaid = models.BigAutoField(primary_key=True)
+    chefe = models.CharField(max_length=512, blank=True, null=True)
+    chefetecnico = models.CharField(max_length=512, blank=True, null=True)
+    chassis = models.CharField(max_length=512, blank=True, null=True)
+    foto_carro = models.CharField(max_length=512, blank=True, null=True)
+    construtor_construtorid = models.ForeignKey(Construtor, models.DO_NOTHING, db_column='construtor_construtorid')
+    epoca_ano = models.ForeignKey(Epoca, models.DO_NOTHING, db_column='epoca_ano')
+
+    class Meta:
+        managed = False
+        db_table = 'equipa'
+        unique_together = (('equipaid', 'construtor_construtorid'),)
+
+
 class Noticia(models.Model):
     noticiaid = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=50)
     corpo = models.CharField(max_length=5000, blank=True, null=True)
-    foto = models.BinaryField(blank=True, null=True)
+    foto = models.CharField(max_length=512, blank=True, null=True)
     criadoem = models.DateField(blank=True, null=True)
-    circuito_circuitoid = models.ForeignKey(Circuito, on_delete=models.CASCADE, db_column='circuito_circuitoid')
-    corrida_ronda = models.ForeignKey(Corrida, on_delete=models.CASCADE, db_column='corrida_ronda')
-    construtor_construtorid = models.ForeignKey(Construtor, on_delete=models.CASCADE, db_column='construtor_construtorid')
-    piloto_pilotoid = models.ForeignKey('Piloto', on_delete=models.CASCADE, db_column='piloto_pilotoid')
+    circuito_circuitoid = models.ForeignKey(Circuito, models.DO_NOTHING, db_column='circuito_circuitoid')
+    corrida_ronda = models.ForeignKey(Corrida, models.DO_NOTHING, db_column='corrida_ronda')
+    construtor_construtorid = models.ForeignKey(Construtor, models.DO_NOTHING, db_column='construtor_construtorid')
+    piloto_pilotoid = models.ForeignKey('Piloto', models.DO_NOTHING, db_column='piloto_pilotoid')
 
     class Meta:
         managed = False
@@ -96,12 +110,12 @@ class Noticia(models.Model):
 
 class Piloto(models.Model):
     pilotoid = models.AutoField(primary_key=True)
-    numero_corrida = models.IntegerField(blank=True, null=True)
     nome = models.CharField(max_length=512, blank=True, null=True)
     nacionalidade = models.CharField(max_length=512, blank=True, null=True)
     nascimento = models.DateField(blank=True, null=True)
-    foto = models.BinaryField(blank=True, null=True)
-    construtor_construtorid = models.ForeignKey(Construtor, on_delete=models.CASCADE, db_column='construtor_construtorid')
+    foto = models.CharField(max_length=512, blank=True, null=True)
+    equipa_equipaid = models.ForeignKey(Equipa, models.DO_NOTHING, db_column='equipa_equipaid')
+    equipa_construtor_construtorid = models.BigIntegerField()
 
     class Meta:
         managed = False
@@ -114,8 +128,8 @@ class Resultados(models.Model):
     posfinal = models.IntegerField(blank=True, null=True)
     tempototal = models.IntegerField(blank=True, null=True)
     voltarapida = models.IntegerField(blank=True, null=True)
-    corrida_ronda = models.ForeignKey(Corrida, on_delete=models.CASCADE, db_column='corrida_ronda')
-    piloto_pilotoid = models.ForeignKey(Piloto, on_delete=models.CASCADE, db_column='piloto_pilotoid')
+    corrida_ronda = models.ForeignKey(Corrida, models.DO_NOTHING, db_column='corrida_ronda')
+    piloto_pilotoid = models.ForeignKey(Piloto, models.DO_NOTHING, db_column='piloto_pilotoid')
 
     class Meta:
         managed = False
