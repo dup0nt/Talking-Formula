@@ -13,9 +13,3 @@ insert into circuito values(8, 'Baku City Circuit',TO_DATE('17/06/2016', 'DD/MM/
 insert into circuito values(9, 'Circuit Gilles-Villeneuve',TO_DATE('06/10/1978', 'DD/MM/YYYY'), 4.361, 14, 'https://a.espncdn.com/i/venues/f1/day/51.svg');
 insert into circuito values(10, 'Silverstone Circuit',TO_DATE('06/10/1978', 'DD/MM/YYYY'), 4.361, 14, 'https://a.espncdn.com/i/venues/f1/day/51.svg');
 
-
-select * from corrida;
-
-insert into corrida values(1, 'Bahrain International Circuit', TO_DATE('17/03/2004', 'DD/MM/YYYY'), 5.412, 15, 'https://a.espncdn.com/i/venues/f1/day/243.svg'  );
-insert into corrida values(2, 'Jeddah Street Circuit', TO_DATE('3/12/2021', 'DD/MM/YYYY'), 5.154, 27, 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Jeddah_Street_Circuit_2021.svg/250px-Jeddah_Street_Circuit_2021.svg.png');
-insert into corrida values(3, 'Albert Park Circuit' , TO_DATE('20/11/1953', 'DD/MM/YYYY'), 5.303, 16, 'https://a.espncdn.com/i/venues/f1/day/241.svg'  );
