@@ -20,5 +20,4 @@ insert into piloto_equipa values (4,2,2);
 insert into piloto(nome, nacionalidade, nascimento, foto) values 
 ('Michael Schumacher', 'Alemanha', TO_DATE('03/01/1969', 'DD/MM/YYYY'), 'https://prabook.com/web/show-photo-icon.jpg?id=1918771&width=220&cache=false');
 
-
-select * from piloto_equipa
+select * from piloto

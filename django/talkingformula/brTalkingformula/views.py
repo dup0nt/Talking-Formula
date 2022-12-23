@@ -18,3 +18,12 @@ def index(request):
       
     }
     return HttpResponse(template.render(context, request))
+
+def pilotos(request):
+    template = loader.get_template('brTalkingformula/pilotos.html')
+    items = Piloto.objects.order_by('nome')[0:]
+    context = {
+        'pilotos':items
+    }
+
+    return HttpResponse(template.render(context, request))

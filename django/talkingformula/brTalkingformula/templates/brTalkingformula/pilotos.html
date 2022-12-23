@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'pilotos_style.css' %}">
+    <div class="topnav">
+        <a href="/brTalkingformula/" class="split">Talking <b><i>Formula 1</i></b></a>
+        <a href="/brTalkingformula/pilotos">Pilotos</a>
+        <a>Corridas</a>
+    </div>
+
+    <head>
+        <title>Talking Formula</title>
+    </head>
+
+<div class="wrapper">
+    {% if pilotos %}
+    
+    {% for pilotoROW in pilotos %}
+        <div class="box">
+            <picture>
+                <img src={{pilotoROW.foto}} alt={{pilotoROW.nome}}-{{pilotoROW.foto}} style="width:200px;">
+            </picture>
+            <br>
+            <a href="/brTalkingformula/pilotos/{{pilotoROW.id}}">{{ pilotoROW.nome }}</a>
+        </div>
+    {% endfor %}
+    
+    {% else %}
+        <p>No pilotos to show.</p>
+    {% endif %}
+
+</div>
+
+
+
+
+</html>
