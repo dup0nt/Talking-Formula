@@ -6,7 +6,7 @@
     <div class="topnav">
         <a href="/brTalkingformula/" class="split">Talking <b><i>Formula 1</i></b></a>
         <a href="/brTalkingformula/pilotos">Pilotos</a>
-        <a href="/brTalkingformula/corridas" >Corridas</a>
+        <a href="/brTalkingformula/corridas" >Calendário</a>
     </div>
 
     <head>
@@ -18,7 +18,12 @@
         
         {% for corridaROW in corridas %}
             <div class="box">
-                <a href="/brTalkingformula/corridas/{{corridaROW.id}}">{{ corridaROW.nome }}</a>
+                <div class="titulo">
+                    <a href="/brTalkingformula/corridas/{{corridaROW.id}}">{{ corridaROW.nome }}</a>
+                </div> 
+                <div class="foto">
+                    gjc
+                </div> 
             </div>
         {% endfor %}
         
