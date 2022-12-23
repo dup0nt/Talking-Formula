@@ -21,7 +21,11 @@ insert into corrida values(1, 'Gulf Air Bahrain Grand Prix',57, TO_DATE('20/03/2
 insert into corrida values(2, 'STC Saudi Arabian GP',57, TO_DATE('27/03/2022', 'DD/MM/YYYY'), '21:30', 31, 48, 0, 14,0, 2022,2)
 insert into corrida values(3, 'Heineken Australian GP',58, TO_DATE('10/04/2022', 'DD/MM/YYYY'), '06:00', 22, 40, 0,33 38, 2022,3);
 insert into corrida values(4, 'Rolex Emilia Romagna GP',62, TO_DATE('24/04/2022', 'DD/MM/YYYY'), '14:00', 25, 51, 0, 13,57, 2022,4);
-insert into corrida values(5, 'Crypto.com Miami GP',57, TO_DATE('08/05/2022', 'DD/MM/YYYY'), '20:30', 25, 43, 0, 13,57, 2022,4);
-insert into corrida values(6, 'Rolex Emilia Romagna GP',62, TO_DATE('24/04/2022', 'DD/MM/YYYY'), '14:00', 25, 51, 0, 13,57, 2022,4);
+insert into corrida values(5, 'Crypto.com Miami GP',57, TO_DATE('08/05/2022', 'DD/MM/YYYY'), '20:30', 25, 43, 0, 13,55, 2022,5);
+insert into corrida values(6, 'Pirelli Spanish GP',62, TO_DATE('22/05/2022', 'DD/MM/YYYY'), '14:00', 35, 55, 0, 9,70, 2022,6);
+insert into corrida values(7, 'Monaco GP',64, TO_DATE('29/05/2022', 'DD/MM/YYYY'), '14:00', 20, 40, 38, 60,7, 2022,7);
+insert into corrida values(8, 'Azerbaijão GP',51, TO_DATE('12/06/2022', 'DD/MM/YYYY'), '21:00', 30, 48, 0, 12,0, 2022,8);
+insert into corrida values(9, 'Pirelli Spanish GP',62, TO_DATE('22/05/2022', 'DD/MM/YYYY'), '14:00', 35, 55, 0, 9,70, 2022,6);
+insert into corrida values(10, 'Pirelli Spanish GP',62, TO_DATE('22/05/2022', 'DD/MM/YYYY'), '14:00', 35, 55, 0, 9,70, 2022,6);
 
 
