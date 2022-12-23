@@ -36,3 +36,12 @@ def resultadoss(request):
     }
 
     return HttpResponse(template.render(context, request))
+
+    
+def corridas(request):
+    template = loader.get_template('brTalkingformula/corridas.html')
+    items = Corrida.objects.order_by('ronda')[0:]
+    context = {
+        'corridas':items
+    }
+    return HttpResponse(template.render(context, request))
