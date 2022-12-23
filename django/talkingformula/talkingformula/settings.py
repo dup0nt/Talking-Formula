@@ -45,10 +45,10 @@ INSTALLED_APPS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'talkingformula',
+        'NAME': 'talkingformuladb',
         'USER': 'postgres',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
+        'PASSWORD': 'adminadmin',
+        'HOST': 'talkingformuladb.cjrbweuzqq2d.eu-west-3.rds.amazonaws.com',
         'PORT': '5432',
     }
 }

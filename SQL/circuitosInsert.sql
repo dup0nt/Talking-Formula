@@ -15,7 +15,13 @@ insert into circuito values(10, 'Silverstone Circuit',TO_DATE('06/10/1978', 'DD/
 
 
 select * from corrida;
+select * from epoca;
 
-insert into corrida values(1, 'Bahrain International Circuit', TO_DATE('17/03/2004', 'DD/MM/YYYY'), 5.412, 15, 'https://a.espncdn.com/i/venues/f1/day/243.svg'  );
-insert into corrida values(2, 'Jeddah Street Circuit', TO_DATE('3/12/2021', 'DD/MM/YYYY'), 5.154, 27, 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Jeddah_Street_Circuit_2021.svg/250px-Jeddah_Street_Circuit_2021.svg.png');
-insert into corrida values(3, 'Albert Park Circuit' , TO_DATE('20/11/1953', 'DD/MM/YYYY'), 5.303, 16, 'https://a.espncdn.com/i/venues/f1/day/241.svg'  );
+insert into corrida values(1, 'Gulf Air Bahrain Grand Prix',57, TO_DATE('20/03/2022', 'DD/MM/YYYY'), '21:30', 29, 49, 0, 10,0, 2022,1);
+insert into corrida values(2, 'STC Saudi Arabian GP',57, TO_DATE('27/03/2022', 'DD/MM/YYYY'), '21:30', 31, 48, 0, 14,0, 2022,2)
+insert into corrida values(3, 'Heineken Australian GP',58, TO_DATE('10/04/2022', 'DD/MM/YYYY'), '06:00', 22, 40, 0,33 38, 2022,3);
+insert into corrida values(4, 'Rolex Emilia Romagna GP',62, TO_DATE('24/04/2022', 'DD/MM/YYYY'), '14:00', 25, 51, 0, 13,57, 2022,4);
+insert into corrida values(5, 'Crypto.com Miami GP',57, TO_DATE('08/05/2022', 'DD/MM/YYYY'), '20:30', 25, 43, 0, 13,57, 2022,4);
+insert into corrida values(6, 'Rolex Emilia Romagna GP',62, TO_DATE('24/04/2022', 'DD/MM/YYYY'), '14:00', 25, 51, 0, 13,57, 2022,4);
+
+
