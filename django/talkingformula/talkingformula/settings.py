@@ -47,7 +47,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'talkingformula',
         'USER': 'postgres',
-        'PASSWORD': 'mjmZ1731',
+        'PASSWORD': 'admin',
         'HOST': 'localhost',
         'PORT': '5432',
     }
