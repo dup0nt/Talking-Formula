@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'corridas_style.css' %}">
+    <div class="topnav">
+        <a href="/brTalkingformula/" class="split">Talking <b><i>Formula 1</i></b></a>
+        <a href="/brTalkingformula/pilotos">Pilotos</a>
+        <a href="/brTalkingformula/corridas" >Corridas</a>
+    </div>
+
+    <head>
+        <title>Talking Formula</title>
+    </head>
+
+<div class="wrapper">
+    {% if corridas %}
+        
+        {% for corridaROW in corridas %}
+            <div class="box">
+                <a href="/brTalkingformula/corridas/{{corridaROW.id}}">{{ corridaROW.nome }}</a>
+            </div>
+        {% endfor %}
+        
+        {% else %}
+            <p>No corridas to show.</p>
+        {% endif %}
+
+</div>
+
+
+
+
+</html>
