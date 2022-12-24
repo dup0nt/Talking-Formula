@@ -28,6 +28,7 @@ def pilotos(request):
 
     return HttpResponse(template.render(context, request))
 
+"""
 def resultadoss(request):
     template = loader.get_template('brTalkingformula/resultados.html')
     items = Piloto.objects.order_by('nome')[0:]
@@ -36,12 +37,23 @@ def resultadoss(request):
     }
 
     return HttpResponse(template.render(context, request))
-
+"""
     
 def corridas(request):
     template = loader.get_template('brTalkingformula/corridas.html')
-    items = Corrida.objects.order_by('ronda')[0:]
+    items = Corrida.objects.order_by('ronda')[0:]                       #lista das corridas
+
+
     context = {
-        'corridas':items
+        'corridas': items,
     }
     return HttpResponse(template.render(context, request))
+
+def circuitos(request):
+    template = loader.get_template('brTalkingformula/circuitos.html')
+    items = Corrida.objects.order_by('circuitoid')[0:]
+    context = {
+        'circuitos':items
+    }
+    return HttpResponse(template.render(context, request))
+

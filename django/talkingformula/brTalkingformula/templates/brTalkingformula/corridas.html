@@ -13,25 +13,44 @@
         <title>Talking Formula</title>
     </head>
 
-<div class="wrapper">
-    {% if corridas %}
+    <body>
+        <table>
+            <thead>
+            <tr>
+                <th>Data</th>
+                <th>Corrida</th>
+                <th>Vencedor</th>
+            </tr>
+            <thead>
+            <tbody>
+                <div class="wrapper">
+                    {% if corridas %}
+                   
+                    {% for corridaROW in corridas %}
+                    <tr>
+                        <td>{{corridaROW.ocorreem}}</td>
+                        <td>
+                            <div class="gp">
+                                <a id="logo" href="/brTalkingformula/pilotos/{{pilotoROW.id}}">{{ corridaROW.nome }}</a>
+                            </div>
+                        <div class="track"> {{corridaROW.circuito_circuitoid.nome}} </div>
+                        </td>
+                        <td> 
+                            TBA
+                        </td>
+                    </tr>
+                    {% endfor %}
+                   
+                    {% else %}
+                        <p>No pilotos to show.</p>
+                    {% endif %}
+                </div>
+            </tbody>
+        </table>
         
-        {% for corridaROW in corridas %}
-            <div class="box">
-                <div class="titulo">
-                    <a href="/brTalkingformula/corridas/{{corridaROW.id}}">{{ corridaROW.nome }}</a>
-                </div> 
-                <div class="foto">
-                    gjc
-                </div> 
-            </div>
-        {% endfor %}
-        
-        {% else %}
-            <p>No corridas to show.</p>
-        {% endif %}
-
-</div>
+    
+    
+  </body>
 
 
 

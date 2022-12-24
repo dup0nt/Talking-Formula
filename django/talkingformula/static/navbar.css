@@ -71,3 +71,8 @@ body{
   .wrapper :hover {
    background-color: #bbbbbb;
   }
+
+  #logo {
+    text-decoration: none;
+    color: black;
+}

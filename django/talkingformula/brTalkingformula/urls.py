@@ -11,5 +11,8 @@ urlpatterns = [
     
     #Corridas
     path('corridas', views.corridas, name='corridas'),
+
+    #Circuitos
+    path('circuitos', views.circuitos, name='circuitos'),
 ]
 
