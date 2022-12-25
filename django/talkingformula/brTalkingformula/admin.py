@@ -21,5 +21,5 @@ admin.site.register(Construtor)
 admin.site.register(Resultados)
 admin.site.register(Comentario)
 admin.site.register(Epoca)
-admin.site.regsiter(Noticia)
+admin.site.register(Noticia)
 

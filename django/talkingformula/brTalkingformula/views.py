@@ -8,14 +8,16 @@ from .models import Piloto
 from .models import PilotoEquipa
 from .models import Equipa
 from .models import Construtor
+from .models import Noticia
 
 
 # Create your views here.
 
 def index(request):
     template = loader.get_template('brTalkingformula/index.html')
+    noticia = Noticia.objects.latest('criadoem')
     context = {
-      
+        'noticia': noticia,
     }
     return HttpResponse(template.render(context, request))
 
@@ -57,3 +59,7 @@ def circuitos(request):
     }
     return HttpResponse(template.render(context, request))
 
+
+def noticias(request):
+  noticias = Noticia.objects.all()
+  return render(request, 'noticias.html', {'noticias': noticias})

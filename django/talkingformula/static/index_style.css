@@ -11,17 +11,33 @@
     grid-column: 1 / 4;
     grid-row: 1 / 3;
     background-color: rgba(0, 99, 99, 0.312);
+    padding-left: 20px;
+    padding-right: 20px;
+    
   }
 
   .left_bblock {
     grid-column: 1 / 3;
     grid-row: 3/10;
     background-color: rgba(111, 99, 99, 0.296);
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .right_sblock {
     grid-column: 3;
     grid-row: 3/10;
     background-color: rgba(89, 69, 69, 0.636);
+    padding-left: 20px;
+    padding-right: 20px;
   }
   
+  img {
+    max-width: 400px;
+    max-height: auto;
+}
+
+.portrait {
+  height: 400px;
+  width: 300px;
+}

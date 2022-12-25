@@ -14,5 +14,10 @@ urlpatterns = [
 
     #Circuitos
     path('circuitos', views.circuitos, name='circuitos'),
+
+    #Noticias
+    #ultima noticia:
+    path('noticias/', views.noticias, name='noticias'),
+
 ]
 

@@ -1,4 +1,6 @@
- {% load static %}
+{% load static %}
+
+
 <!DOCTYPE html>
 <html>
     <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
@@ -18,11 +20,15 @@
 
     <div class="wrapper">
         <div class="top_block">LAST RESULTS</div>
-        <div class="left_bblock">NEWS</div>
+        <div class="left_bblock">
+            <h3>{{ noticia.titulo }} </h3>
+            <div class="portrait">
+                <img src="{{ noticia.foto }}" alt="{{ noticia.titulo }}">
+            </div>
+            <p>{{ noticia.corpo }}</p>
+        </div>
         <div class="right_sblock">
             Standings
-            
-        
         </div>
       </div>
 </html>
