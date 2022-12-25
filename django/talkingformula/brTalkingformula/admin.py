@@ -8,6 +8,9 @@ from .models import PilotoEquipa
 from .models import Equipa
 from .models import Construtor
 from .models import Resultados
+from .models import Comentario
+from .models import Epoca
+from .models import Noticia
 
 admin.site.register(Circuito)
 admin.site.register(Corrida)
@@ -16,3 +19,7 @@ admin.site.register(PilotoEquipa)
 admin.site.register(Equipa)
 admin.site.register(Construtor)
 admin.site.register(Resultados)
+admin.site.register(Comentario)
+admin.site.register(Epoca)
+admin.site.regsiter(Noticia)
+
