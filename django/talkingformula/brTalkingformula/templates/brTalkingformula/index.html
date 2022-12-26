@@ -19,7 +19,19 @@
     <br>
 
     <div class="wrapper">
-        <div class="top_block">LAST RESULTS</div>
+        <div class="top_block">
+            {% if ultimo_resultado %}
+                <ul>
+                {% for resultadoPIL in ultimo_resultado %}
+                    <li>{{resultadoPIL.piloto_pilotoid.nome}} -> {{resultadoPIL.posfinal}}</li> 
+                {% endfor %}
+                </ul>
+                
+            {% else %}
+                <p>No pilotos to show.</p>
+            {% endif %}
+
+        </div>
         <div class="left_bblock">
             <h3>{{ noticia.titulo }} </h3>
             <div class="portrait">
@@ -28,7 +40,7 @@
             <p>{{ noticia.corpo }}</p>
         </div>
         <div class="right_sblock">
-            Standings
+            
         </div>
       </div>
 </html>

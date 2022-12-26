@@ -260,3 +260,11 @@ class Resultados(models.Model):
         managed = False
         db_table = 'resultados'
         unique_together = (('resultadoid', 'corrida_ronda', 'piloto_pilotoid'),)
+
+
+class ResultadoPontos(models.Model):
+    posfinal = models.AutoField(primary_key=True)
+    pontos = models.IntegerField()
+
+    class Meta:
+        db_table = 'resultado_pontos'

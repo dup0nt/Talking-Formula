@@ -19,5 +19,8 @@ urlpatterns = [
     #ultima noticia:
     path('noticias/', views.noticias, name='noticias'),
 
+    #Resultados
+    path('resultados/', views.resultados, name='resultados')
+
 ]
 
