@@ -4,20 +4,28 @@
 <!DOCTYPE html>
 <html>
     <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'XXX.css' %}">
+    
     <div class="topnav">
         <a href="/brTalkingformula/" class="split">Talking <b><i>Formula 1</i></b></a>
         <a href="/brTalkingformula/pilotos">Pilotos</a>
-        <a href="/brTalkingformula/corridas">Calendario</a>
+        <a href="/brTalkingformula/corridas">Calendário</a>
         <a href="/brTalkingformula/resultados">Resultados</a>
     </div>
 
-    <tbody>
-        {% for key values in stadings.items() %}
-         <tr>
-             <td> {{ key }} </td>
-             <td>  {{ values }} </td>
-         </tr>
+    <table>
+    {% for row in standings %}
+        <tr>
+        {% for item in row %}
+            {% with counter=forloop.counter0 %}
+            {% if counter == 0 %}
+                <td class="first-column">{{ item.nome }}</td>
+            {% elif counter == 1 %}
+                <td class="second-column">{{ item }}</td>
+            {% endif %}
+            {% endwith %}
         {% endfor %}
-    </tbody>
+        </tr>
+    {% endfor %}
+    </table>
+      
 </html>
