@@ -1,0 +1,35 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'XXX.css' %}">
+    <div class="topnav">
+        <a href="/brTalkingformula/" class="split">Talking <b><i>Formula 1</i></b></a>
+        <a href="/brTalkingformula/pilotos">Pilotos</a>
+        <a href="/brTalkingformula/corridas">Calendario</a>
+        <a href="/brTalkingformula/resultados">Resultados</a>
+    </div>
+
+    <head>
+        <title>Talking Formula</title>
+    </head>
+    <h3>circuitoid: {{circuito.circuitoid}}</h3>
+    <h3>nome: {{circuito.nome}}</h3>
+    <h3>criadoem: {{circuito.criadoem}}</h3>
+    <h3>comprimento: {{circuito.comprimento}}</h3>
+    <h3>curvas: {{circuito.curvas}}</h3>
+
+    
+    <div class="box">
+        <picture>
+            <img src={{circuito.foto}} alt={{circuitoROW.nome}}-{{circuitoROW.foto}} style="width:200px;">
+        </picture>
+    </div>
+
+</div>
+
+    
+
+</html>

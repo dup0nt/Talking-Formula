@@ -15,6 +15,8 @@ urlpatterns = [
 
     #Circuitos
     path('circuitos', views.circuitos, name='circuitos'),
+    path('circuitos/<int:circuitoid>/', views.circuito, name='circuito'),
+
 
     #Noticias
     #ultima noticia:

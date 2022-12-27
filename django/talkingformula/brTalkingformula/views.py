@@ -51,7 +51,19 @@ def pilotos(request):
     }
 
     return HttpResponse(template.render(context, request))
-   
+
+
+def circuito(request, circuitoid):
+    template = loader.get_template('brTalkingformula/circuito.html')
+    items = Circuito.objects.get(circuitoid = circuitoid)                       #lista dos circuitos
+    context = {
+        'circuito':items
+    }
+
+    return HttpResponse(template.render(context, request))
+
+
+
 def pilotosDetails(request, pilotoid):
     template = loader.get_template('brTalkingformula/piloto_detalhes.html')
     
