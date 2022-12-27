@@ -152,9 +152,9 @@ def circuitos(request):
     }
     return HttpResponse(template.render(context, request))
 
-
-
-
 def noticias(request):
+  template = loader.get_template('brTalkingformula/noticias.html')
   noticias = Noticia.objects.all()
-  return render(request, 'noticias.html', {'noticias': noticias})
+  context = {'noticias': noticias}
+
+  return HttpResponse(template.render(context, request))

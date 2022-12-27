@@ -19,8 +19,7 @@ urlpatterns = [
 
 
     #Noticias
-    #ultima noticia:
-    path('noticias/', views.noticias, name='noticias'),
+    path('noticias', views.noticias, name='noticias'),
 
     #Resultados
     path('resultados/', views.resultados, name='resultados')
