@@ -87,35 +87,23 @@ def resultados(request):
  
     resultados = []
     for corrida in ultimas_corridas:
-        # Retrieve the Resultados objects for the Corrida object
         resultados_corrida = corrida.resultados_set.all()
-        # Append the Resultados objects to the list
         resultados.extend(resultados_corrida)
-
-    """
-    resultados_grouped = {}
-    for key, group in itertools.groupby(resultados, lambda x: x.piloto_pilotoid):
-        total_posfinal = sum(getPontos(resultado.posfinal) for resultado in group)
-        resultados_grouped[key] = total_posfinal
-    """
     
-    standings = []
+    standings = [1,1]
     for piloto in Piloto.objects.all():
         soma = 0
         for resultado in resultados:
-
-            #print("piloto",piloto.pilotoid)
-            #print("resultado", resultado.piloto_pilotoid.pilotoid)
             if (piloto.pilotoid==resultado.piloto_pilotoid.pilotoid):
-
                 soma = soma + get_pontos(resultado.posfinal)
+        standings = np.vstack([standings, [piloto, int(soma)]]) 
 
-        standings = np.vstack([standings, [piloto, soma]]) 
+    standings = standings[1:]
+    standings = standings[(standings[:, 1]).argsort()[::-1]]
 
-    print(standings)
 
     context = {
-        'stadings': standings
+        'standings': standings
     }
 
     return HttpResponse(template.render(context, request))
@@ -124,7 +112,6 @@ def resultados(request):
 def corridas(request):
     template = loader.get_template('brTalkingformula/corridas.html')
     items = Corrida.objects.order_by('ronda')[0:]                       #lista das corridas
-
 
     context = {
         'corridas': items,
