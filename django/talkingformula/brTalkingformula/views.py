@@ -51,6 +51,22 @@ def pilotos(request):
     }
 
     return HttpResponse(template.render(context, request))
+   
+def pilotosDetails(request, pilotoid):
+    template = loader.get_template('brTalkingformula/piloto_detalhes.html')
+    
+
+    try:
+        piloto = Piloto.objects.get(pilotoid = pilotoid)
+        context = {
+            'piloto' : piloto
+            }
+    except Piloto.DoesNotExist:
+        raise Http404("Guitar does not exist")
+    return HttpResponse(template.render(context, request))
+
+    
+
 
 def get_pontos(posfinal):
   # Query the Pontosresultados model to get the pontos value for the given posfinal value
@@ -115,6 +131,20 @@ def corridas(request):
     }
     return HttpResponse(template.render(context, request))
 
+def corridaDetails(request, ronda):
+    template = loader.get_template('brTalkingformula/corrida_detalhes.html')
+    
+
+    try:
+        corrida = Corrida.objects.get(ronda = ronda)
+        context = {
+            'corrida' : corrida
+            }
+    except Corrida.DoesNotExist:
+        raise Http404("Guitar does not exist")
+    return HttpResponse(template.render(context, request))
+
+
 def circuitos(request):
     template = loader.get_template('brTalkingformula/circuitos.html')
     items = Corrida.objects.order_by('circuitoid')[0:]
@@ -122,6 +152,8 @@ def circuitos(request):
         'circuitos':items
     }
     return HttpResponse(template.render(context, request))
+
+
 
 
 def noticias(request):

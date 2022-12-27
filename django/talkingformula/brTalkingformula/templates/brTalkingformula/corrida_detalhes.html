@@ -1,0 +1,36 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'XXX.css' %}">
+    <div class="topnav">
+        <a href="/brTalkingformula/" class="split">Talking <b><i>Formula 1</i></b></a>
+        <a href="/brTalkingformula/pilotos">Pilotos</a>
+        <a href="/brTalkingformula/corridas">Calendario</a>
+        <a href="/brTalkingformula/resultados">Resultados</a>
+    </div>
+
+    <head>
+        <title>Talking Formula</title>
+    </head>
+    <h3>ronda: {{corrida.ronda}}</h3>
+    <h3>nome: {{corrida.nome}}</h3>
+    <h3>voltas: {{corrida.voltas}}</h3>
+    <h3>ocorreEm: {{corrida.ocorreem}}</h3>
+    <h3>horas: {{corrida.horas}}</h3>
+    <h3>temperatura: {{corrida.temperatura}}</h3>
+    <h3>temperaturacircuito: {{corrida.temperaturacircuito}}</h3>
+    <h3>precipitacao: {{corrida.precipitacao}}</h3>
+    <h3>humidade: {{corrida.humidade}}</h3>
+    <h3>exposicaosolar: {{corrida.exposicaosolar}}</h3>
+    <h3>epoca_ano: {{corrida.epoca_ano.ano}}</h3>
+    <h3>circuito_circuitoid: {{corrida.circuito_circuitoid}}</h3>
+
+
+</div>
+
+    
+
+</html>
