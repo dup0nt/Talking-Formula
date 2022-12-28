@@ -109,9 +109,9 @@ class Comentario(models.Model):
 
 class Construtor(models.Model):
     construtorid = models.BigAutoField(primary_key=True)
-    nome = models.CharField(max_length=512, blank=True, null=True)
-    nacionalidade = models.CharField(max_length=512, blank=True, null=True)
-    logo = models.CharField(max_length=512, blank=True, null=True)
+    nome = models.CharField(max_length=512, blank=True)
+    nacionalidade = models.CharField(max_length=512, blank=True)
+    logo = models.CharField(max_length=512, blank=True)
     criadoem = models.DateField(blank=True, null=True)
 
     class Meta:

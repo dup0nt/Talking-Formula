@@ -13,23 +13,6 @@
         <a href="/brTalkingformula/noticias" >Notícias</a>
         <a href="/brTalkingformula/resultados">Resultados</a>
     </div>
-
-    <table>
-    {% for row in standings %}
-        <tr>
-        {% for item in row %}
-            {% with counter=forloop.counter0 %}
-            {% if counter == 0 %}
-                <td>{{ item.nome }}</td>
-                <td>{{ item.</td> 
-            {% elif counter == 1 %}
-                <td class="second-column">{{ item }}</td>
-            {% endif %}
-            {% endwith %}
-        {% endfor %}
-        </tr>
-    {% endfor %}
-    </table>
       
     <body>
         <table>
@@ -44,20 +27,22 @@
             <thead>
             <tbody>
                 <div class="wrapper">
-                    {% if corridas %}
+                    {% if standings.any %}
                    
-                    {% for corridaROW in corridas %}
+                    {% for standingROW in standings %}
                     <tr>
-                        <td>{{corridaROW.ocorreem}}</td>
-                        <td>
-                            <div class="gp">
-                                <a id="logo" href="/brTalkingformula/corrida/{{corridaROW.ronda}}">{{ corridaROW.nome }}</a>
-                            </div>
-                        <div class="track"> <a href ='/brTalkingformula/circuitos/{{corridaROW.circuito_circuitoid.circuitoid}}/'>{{corridaROW.circuito_circuitoid.nome}}</a> </div>
-                        </td>
-                        <td> 
-                            {{corridaROW}}
-                        </td>
+                        <td> {{ forloop.counter }}</td>
+                        {% for item in standingROW %}
+                            {% with counter=forloop.counter0 %}
+                                {% if counter == 0 %}
+                                    <td>{{ item.piloto_pilotoid.nome }}</td>
+                                    <td>{{ item.piloto_pilotoid.nacionalidade }}</td> 
+                                    <td>{{ item.equipa_equipaid.construtor_construtorid.nome }}</td>
+                                {% elif counter == 1 %}
+                                    <td class=>{{ item }}</td>
+                                {% endif %}
+                            {% endwith %}
+                            {% endfor %}
                     </tr>
                     {% endfor %}
                    

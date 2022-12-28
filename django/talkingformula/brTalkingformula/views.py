@@ -121,6 +121,7 @@ def resultados(request):
     standings = standings[1:]
     standings = standings[(standings[:, 1]).argsort()[::-1]]
 
+
     context = {
         'standings': standings
     }
