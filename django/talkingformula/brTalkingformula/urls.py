@@ -20,6 +20,8 @@ urlpatterns = [
 
     #Noticias
     path('noticias', views.noticias, name='noticias'),
+    path('noticias/<int:noticiaid>/', views.noticiasDetails, name='noticiaDetails'),
+
 
     #Resultados
     path('resultados/', views.resultados, name='resultados')

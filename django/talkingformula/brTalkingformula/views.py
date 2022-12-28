@@ -158,3 +158,14 @@ def noticias(request):
   context = {'noticias': noticias}
 
   return HttpResponse(template.render(context, request))
+
+def noticiasDetails(request, noticiaid):
+    template = loader.get_template('brTalkingformula/noticia_detalhes.html')
+    try:
+        noticia = Noticia.objects.get(noticiaid =noticiaid)
+        context = {
+            'noticia' : noticia
+            }
+    except Corrida.DoesNotExist:
+        raise Http404("Guitar does not exist")
+    return HttpResponse(template.render(context, request))
