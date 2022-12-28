@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html>
     <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
-    
+    <link rel="stylesheet" type="text/css" href="{% static 'resultados_style.css' %}">
+
     <div class="topnav">
         <a href="/brTalkingformula/" class="split">Talking <b><i>Formula 1</i></b></a>
         <a href="/brTalkingformula/pilotos">Pilotos</a>
@@ -19,7 +20,8 @@
         {% for item in row %}
             {% with counter=forloop.counter0 %}
             {% if counter == 0 %}
-                <td class="first-column">{{ item.nome }}</td>
+                <td>{{ item.nome }}</td>
+                <td>{{ item.</td> 
             {% elif counter == 1 %}
                 <td class="second-column">{{ item }}</td>
             {% endif %}
@@ -29,4 +31,41 @@
     {% endfor %}
     </table>
       
+    <body>
+        <table>
+            <thead>
+            <tr>
+                <th>POS</th>
+                <th>Piloto</th>
+                <th>Nacionalidade</th>
+                <th>Construtor</th>
+                <th>Pontos</th>
+            </tr>
+            <thead>
+            <tbody>
+                <div class="wrapper">
+                    {% if corridas %}
+                   
+                    {% for corridaROW in corridas %}
+                    <tr>
+                        <td>{{corridaROW.ocorreem}}</td>
+                        <td>
+                            <div class="gp">
+                                <a id="logo" href="/brTalkingformula/corrida/{{corridaROW.ronda}}">{{ corridaROW.nome }}</a>
+                            </div>
+                        <div class="track"> <a href ='/brTalkingformula/circuitos/{{corridaROW.circuito_circuitoid.circuitoid}}/'>{{corridaROW.circuito_circuitoid.nome}}</a> </div>
+                        </td>
+                        <td> 
+                            {{corridaROW}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                   
+                    {% else %}
+                        <p>No pilotos to show.</p>
+                    {% endif %}
+                </div>
+            </tbody>
+        </table>
+  </body>
 </html>
