@@ -103,22 +103,35 @@ def resultados(request):
         resultados.extend(resultados_corrida)
     
     standings = [1,1]
+
+    for pilotoEquipa in PilotoEquipa.objects.all():
+        soma = 0
+        for resultado in resultados:
+            if (pilotoEquipa.piloto_pilotoid.pilotoid==resultado.piloto_pilotoid.pilotoid):
+                soma = soma + get_pontos(resultado.posfinal)
+        standings = np.vstack([standings, [pilotoEquipa, soma]]) 
+    """
     for piloto in Piloto.objects.all():
         soma = 0
         for resultado in resultados:
             if (piloto.pilotoid==resultado.piloto_pilotoid.pilotoid):
                 soma = soma + get_pontos(resultado.posfinal)
-        standings = np.vstack([standings, [piloto, int(soma)]]) 
-
+        standings = np.vstack([standings, [piloto, soma]]) 
+    """
     standings = standings[1:]
     standings = standings[(standings[:, 1]).argsort()[::-1]]
-
 
     context = {
         'standings': standings
     }
 
     return HttpResponse(template.render(context, request))
+
+
+"""
+
+
+"""
 
     
 def corridas(request):

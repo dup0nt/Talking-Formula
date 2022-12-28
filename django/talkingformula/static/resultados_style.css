@@ -1,0 +1,142 @@
+body{
+    margin-top: 100px;
+  }
+
+  .wrapper {
+    padding-left: 110px;
+    padding-right: 110px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    grid-auto-rows: minmax(200px, auto);  
+  }
+
+  .subbox{
+    display:grid;
+    grid-template-areas: 
+    "head head head head head"
+    "photo photo bl tab tab"
+    "photo photo bl tab tab"
+    "photo photo bl tab tab";
+    padding: 20px;
+
+  }
+
+  .subbox.titulo{
+    grid-area: head;
+    text-align: left;
+    font-family: formulaonefont;
+    font-size: 25px;
+  }
+
+  .foto{
+    grid-column: 1/2;
+    grid-row: 3/5;
+    text-align: left;
+    background-color: black;
+  }
+
+  
+  table {
+    border-spacing: 1;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    max-width: 1550px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+  }
+  table * {
+    position: relative;
+  }
+
+  table td, table th {
+    padding-left: 8px;
+  }
+  table thead tr {
+    height: 60px;
+    background: #afafaf;
+    font-size: 16px;
+  }
+  table tbody tr {
+    height: 48px;
+    border-bottom: 1px solid #E3F1D5;
+  }
+  table tbody tr:last-child {
+    border: 0;
+  }
+  table td, table th {
+    text-align: left;
+  }
+  table td.l, table th.l {
+    text-align: right;
+  }
+  table td.c, table th.c {
+    text-align: center;
+    
+  }
+  table td.r, table th.r {
+    text-align: center;
+  }
+  
+  @media screen and (max-width: 35.5em) {
+    table {
+      display: block;
+    }
+    table > *, table tr, table td, table th {
+      display: block;
+    }
+    table thead {
+      display: none;
+    }
+    table tbody tr {
+      height: auto;
+      padding: 8px 0;
+    }
+    table tbody tr td {
+      padding-left: 45%;
+      margin-bottom: 12px;
+    }
+    table tbody tr td:last-child {
+      margin-bottom: 0;
+    }
+    table tbody tr td:before {
+      position: absolute;
+      font-weight: 700;
+      width: 40%;
+      left: 10px;
+      top: 0;
+    }
+    table tbody tr td:nth-child(1):before {
+      content: "Code";
+    }
+    table tbody tr td:nth-child(2):before {
+      content: "Stock";
+    }
+    table tbody tr td:nth-child(3):before {
+      content: "Cap";
+    }
+    table tbody tr td:nth-child(4):before {
+      content: "Inch";
+    }
+    table tbody tr td:nth-child(5):before {
+      content: "Box Type";
+    }
+  }
+
+.track{
+  font-size: 12px;
+  color:rgb(123, 123, 123);
+}
+
+.gp{
+  font-family: formulaonefont;
+  text-decoration: none;
+}
+
+.gp:hover{
+  font-size: 17px;
+  font-family: formulaonefont;
+}

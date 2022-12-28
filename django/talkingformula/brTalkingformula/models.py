@@ -8,6 +8,7 @@
 from django.db import models
 
 
+
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
@@ -92,21 +93,19 @@ class Circuito(models.Model):
 
 class Comentario(models.Model):
     comentarioid = models.AutoField(primary_key=True)
-    nome = models.CharField(max_length=80, blank=True, null=True)
-    corpo = models.CharField(max_length=2000, blank=True, null=True)
-    criadoem = models.DateField(blank=True, null=True)
-    corrida_ronda = models.ForeignKey('Corrida', models.DO_NOTHING, db_column='corrida_ronda')
-    noticia_noticiaid = models.ForeignKey('Noticia', models.DO_NOTHING, db_column='noticia_noticiaid')
-    noticia_circuito_circuitoid = models.IntegerField()
-    noticia_corrida_ronda = models.IntegerField()
-    noticia_construtor_construtorid = models.BigIntegerField()
-    noticia_piloto_pilotoid = models.IntegerField()
+    nome = models.CharField(max_length=80)
+    corpo = models.CharField(max_length=2000)
+    criadoem = models.DateField()
+    noticia_noticiaid = models.IntegerField()
 
     class Meta:
         managed = False
         db_table = 'comentario'
-        unique_together = (('comentarioid', 'corrida_ronda', 'noticia_noticiaid', 'noticia_circuito_circuitoid', 'noticia_corrida_ronda', 'noticia_construtor_construtorid', 'noticia_piloto_pilotoid'),)
-
+        unique_together = (('comentarioid', 'noticia_noticiaid'),)
+        ordering = ['criadoem']
+    
+    def __str__(self):
+        return 'Comentário {} de {}'.format(self.body, self.nome)
 
 class Construtor(models.Model):
     construtorid = models.BigAutoField(primary_key=True)
@@ -137,6 +136,7 @@ class Corrida(models.Model):
     class Meta:
         managed = False
         db_table = 'corrida'
+        ordering = ['ocorreem']
 
 
 class DjangoAdminLog(models.Model):
@@ -211,17 +211,14 @@ class Noticia(models.Model):
     noticiaid = models.AutoField(primary_key=True)
     titulo = models.CharField(max_length=50)
     corpo = models.CharField(max_length=5000, blank=True, null=True)
-    foto = models.CharField(max_length=512, blank=True, null=True)
-    criadoem = models.DateField(blank=True, null=True)
-    circuito_circuitoid = models.ForeignKey(Circuito, models.DO_NOTHING, db_column='circuito_circuitoid')
-    corrida_ronda = models.ForeignKey(Corrida, models.DO_NOTHING, db_column='corrida_ronda')
-    construtor_construtorid = models.ForeignKey(Construtor, models.DO_NOTHING, db_column='construtor_construtorid')
-    piloto_pilotoid = models.ForeignKey('Piloto', models.DO_NOTHING, db_column='piloto_pilotoid')
+    foto = models.CharField(max_length=512)
+    criadoem = models.DateField()
 
     class Meta:
         managed = False
         db_table = 'noticia'
-        unique_together = (('noticiaid', 'circuito_circuitoid', 'corrida_ronda', 'construtor_construtorid', 'piloto_pilotoid'),)
+        ordering = ['-criadoem'] 
+
 
 
 class Piloto(models.Model):
@@ -260,6 +257,9 @@ class Resultados(models.Model):
         managed = False
         db_table = 'resultados'
         unique_together = (('resultadoid', 'corrida_ronda', 'piloto_pilotoid'),)
+        #ordering = ['posfinal']
+
+    
 
 
 class ResultadoPontos(models.Model):
