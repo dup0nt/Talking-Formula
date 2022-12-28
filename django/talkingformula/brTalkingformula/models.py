@@ -95,7 +95,7 @@ class Comentario(models.Model):
     comentarioid = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=80)
     corpo = models.CharField(max_length=2000)
-    criadoem = models.DateField()
+    criadoem = models.DateTimeField(auto_now_add=True)
     noticia_noticiaid = models.IntegerField()
 
     class Meta:
@@ -105,7 +105,7 @@ class Comentario(models.Model):
         ordering = ['criadoem']
     
     def __str__(self):
-        return 'Comentário {} de {}'.format(self.body, self.nome)
+        return 'Comentado por {} a {}'.format(self.nome, self.criadoem)
 
 class Construtor(models.Model):
     construtorid = models.BigAutoField(primary_key=True)

@@ -13,6 +13,9 @@ from .models import Noticia
 from .models import Resultados
 from .models import Epoca
 from .models import ResultadoPontos
+from .models import Comentario
+
+from .forms import ComentarioForm
 
 # Create your views here.
 
@@ -129,11 +132,6 @@ def resultados(request):
     return HttpResponse(template.render(context, request))
 
 
-"""
-
-
-"""
-
     
 def corridas(request):
     template = loader.get_template('brTalkingformula/corridas.html')
@@ -175,11 +173,29 @@ def noticias(request):
 
 def noticiasDetails(request, noticiaid):
     template = loader.get_template('brTalkingformula/noticia_detalhes.html')
-    try:
-        noticia = Noticia.objects.get(noticiaid =noticiaid)
-        context = {
-            'noticia' : noticia
-            }
-    except Corrida.DoesNotExist:
-        raise Http404("Guitar does not exist")
+    noticia = Noticia.objects.get(noticiaid =noticiaid)
+
+    comentarios = Comentario.objects.filter(noticia_noticiaid = noticiaid)
+    novo_comentario = None
+
+    #Quando postado um novo comentario
+    if request.method == 'POST':
+        comentario_form = ComentarioForm(data=request.POST)
+        if comentario_form.is_valid():
+
+            # Create Comment object but don't save to database yet
+            novo_comentario = comentario_form.save(commit=False)
+            # Assign the current post to the comment
+            novo_comentario.noticia_noticiaid = noticia.noticiaid
+            # Save the comment to the database
+            novo_comentario.save()
+    else:
+        comentario_form = ComentarioForm()
+
+    context = {
+        'noticia' : noticia,
+        'comentarios': comentarios,
+        'novo_comentario' : novo_comentario,
+        'comentario_form' : comentario_form
+               }
     return HttpResponse(template.render(context, request))

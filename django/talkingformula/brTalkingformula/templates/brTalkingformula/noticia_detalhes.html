@@ -22,8 +22,32 @@
     <h3>corpo: {{noticia.corpo}}</h3>
     <h3>criadoem: {{noticia.criadoem}}</h3>
 
-  <div class="box">
+<div class="box">
         <picture>
             <img src={{noticia.foto}} alt={{noticiaoROW.nome}}-{{noticiaROW.foto}} style="width:200px;">
         </picture>
-    </div>
+</div>
+
+{% for comment in comentarios %}
+<div class="comments" style="padding: 10px;">
+  <p class="font-weight-bold">
+    {{ comment.nome }}
+    <span class=" text-muted font-weight-normal">
+      {{ comment.criadoem }}
+    </span>
+  </p>
+  {{ comment.corpo | linebreaks }}
+</div>
+{% endfor %}
+
+
+<div class="card-body">
+
+    <h3>Leave a comment</h3>
+    <form method="post" style="margin-top: 1.3em;">
+      {{ comentario_form.as_p }}
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+    </form>
+
+  </div>
