@@ -85,14 +85,6 @@ def pilotosDetails(request, pilotoid):
     
 
 
-def get_pontos(posfinal):
-  # Query the Pontosresultados model to get the pontos value for the given posfinal value
-  try:
-    pontosresultado = ResultadoPontos.objects.get(posfinal=posfinal)
-    return pontosresultado.pontos
-  except ResultadoPontos.DoesNotExist:
-    return 0
-
 def resultadosPilotos(request, epoca_ano=Epoca.objects.first().ano):
     template = loader.get_template('brTalkingformula/resultados.html')
     
@@ -112,7 +104,7 @@ def resultadosPilotos(request, epoca_ano=Epoca.objects.first().ano):
         soma = 0
         for resultado in resultados:
             if (pilotoEquipa.piloto_pilotoid.pilotoid==resultado.piloto_pilotoid.pilotoid):
-                soma = soma + get_pontos(resultado.posfinal)
+                soma = soma + resultado.posfinal.pontos
         standings = np.vstack([standings, [pilotoEquipa, soma]]) 
 
     standings = standings[1:]
@@ -181,11 +173,23 @@ def corridaDetails(request, ronda):
 
     try:
         corrida = Corrida.objects.get(ronda = ronda)
+        pontos = ResultadoPontos.objects.all()
+        resultado = []
+        try: 
+            resultado = Resultados.objects.filter(corrida_ronda = ronda)
+            
+        except Resultados.DoesNotExist:
+            raise Http404("Resultado não existe")
+
+        print(pontos[0])
+        
         context = {
-            'corrida' : corrida
+            'corrida' : corrida,
+            'resultado': resultado,
+            'pontos' : pontos
             }
     except Corrida.DoesNotExist:
-        raise Http404("Guitar does not exist")
+        raise Http404("Corrida does not exist")
     return HttpResponse(template.render(context, request))
 
 

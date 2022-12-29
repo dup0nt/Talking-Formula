@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'XXX.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'details_style.css' %}">
     <div class="topnav">
         <a href="/brTalkingformula/" class="split">Talking <b><i>Formula 1</i></b></a>
         <a href="/brTalkingformula/pilotos">Pilotos</a>
@@ -32,7 +32,42 @@
 
 
 </div>
+    {% if resultado.all %}
 
+    <br>
     
-
+    <body>
+        <table>
+            <thead>
+            <tr>
+                <th>POS</th>
+                <th>Piloto</th>
+                <th>Nacionalidade</th>
+                <th>Volta rápida</th>
+                <th>Pontos</th>
+            </tr>
+            <thead>
+            <tbody>
+                <div class="wrapper">
+                    
+                   
+                    {% for resultadoROW in resultado %}
+                    <tr>
+                        <td> {{ resultadoROW.posfinal.posfinal }}</td>
+                        <td> {{resultadoROW.piloto_pilotoid.nome}}</td>
+                        <td> {{resultadoROW.piloto_pilotoid.nacionalidade}}</td>
+                        <td> {{resultadoROW.voltarapida}}</td>
+                        <td> {{resultadoROW.posfinal.pontos}}</td>
+                    </tr>
+                    {% endfor %}
+                   
+    
+                    
+                </div>
+            </tbody>
+        </table>
+  </body>
+  {% else %}
+        <p>Não há dados desta época</p>
+  {% endif %}
 </html>
