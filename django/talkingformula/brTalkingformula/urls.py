@@ -9,13 +9,18 @@ urlpatterns = [
     path('pilotos', views.pilotos, name='pilotos'),
     path('pilotos/<int:pilotoid>/', views.pilotosDetails, name='pilotosDetails'),
     
+    #Construtores
+    path('construtores', views.construtores, name='construtores'),
+
+
+
     #Corridas
     path('corridas', views.corridas, name='corridas'),
     path('corrida/<int:ronda>/', views.corridaDetails, name='corridaDetails'),
 
     #Circuitos
     path('circuitos', views.circuitos, name='circuitos'),
-    path('circuitos/<int:circuitoid>/', views.circuito, name='circuito'),
+    path('circuitos/<int:circuitoid>/', views.circuito, name='circuitoDetails'),
 
 
     #Noticias

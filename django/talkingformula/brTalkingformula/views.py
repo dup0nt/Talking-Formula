@@ -131,7 +131,14 @@ def resultados(request):
 
     return HttpResponse(template.render(context, request))
 
-
+def construtores(request):
+    template = loader.get_template('brTalkingformula/construtores.html')
+    construtores = Construtor.objects.all()
+    context = {
+        'construtores' : construtores
+    }
+    
+    return HttpResponse(template.render(context, request))
     
 def corridas(request):
     template = loader.get_template('brTalkingformula/corridas.html')
