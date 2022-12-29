@@ -117,6 +117,9 @@ class Construtor(models.Model):
     class Meta:
         managed = False
         db_table = 'construtor'
+    
+    def __str__(self):
+        return self.nome
 
 
 class Corrida(models.Model):
@@ -137,6 +140,9 @@ class Corrida(models.Model):
         managed = False
         db_table = 'corrida'
         ordering = ['ocorreem']
+    
+    def __str__(self):
+        return self.nome
 
 
 class DjangoAdminLog(models.Model):
@@ -190,6 +196,10 @@ class Epoca(models.Model):
     class Meta:
         managed = False
         db_table = 'epoca'
+        ordering = ['-ano']
+
+    def __str__(self):
+        return self.ano
 
 
 class Equipa(models.Model):
@@ -206,6 +216,8 @@ class Equipa(models.Model):
         db_table = 'equipa'
         unique_together = (('equipaid', 'construtor_construtorid'),)
 
+    def __str__(self):
+        return '{} da Season {}'.format(self.construtor_construtorid.nome, self.epoca_ano.ano)
 
 class Noticia(models.Model):
     noticiaid = models.AutoField(primary_key=True)
@@ -219,6 +231,8 @@ class Noticia(models.Model):
         db_table = 'noticia'
         ordering = ['-criadoem'] 
 
+    def __str__(self):
+        return '{} publicado a {}'.format(self.titulo, self.criadoem)
 
 
 class Piloto(models.Model):
@@ -232,6 +246,8 @@ class Piloto(models.Model):
         managed = False
         db_table = 'piloto'
 
+    def __str__(self):
+        return self.nome
 
 class PilotoEquipa(models.Model):
     piloto_pilotoid = models.OneToOneField(Piloto, models.DO_NOTHING, db_column='piloto_pilotoid', primary_key=True)
@@ -243,6 +259,8 @@ class PilotoEquipa(models.Model):
         db_table = 'piloto_equipa'
         unique_together = (('piloto_pilotoid', 'equipa_equipaid', 'equipa_construtor_construtorid'),)
 
+    def __str__(self):
+        return '{} integra a equipa do construtor {} na epoca {}'.format(self.piloto_pilotoid.nome, self.equipa_equipaid.construtor_construtorid.nome, self.equipa_equipaid.epoca_ano.ano)
 
 class Resultados(models.Model):
     resultadoid = models.AutoField(primary_key=True)
@@ -257,8 +275,10 @@ class Resultados(models.Model):
         managed = False
         db_table = 'resultados'
         unique_together = (('resultadoid', 'corrida_ronda', 'piloto_pilotoid'),)
-        #ordering = ['posfinal']
+        
 
+    def __str__(self):
+        return '{} é {} na corrida {} da epoca {}'.format(self.piloto_pilotoid.nome, self.posfinal, self.corrida_ronda.circuito_circuitoid.nome, self.corrida_ronda.epoca_ano.ano)
     
 
 
@@ -268,3 +288,6 @@ class ResultadoPontos(models.Model):
 
     class Meta:
         db_table = 'resultado_pontos'
+
+    def __str__(self):
+        return 'POS {} equivale a {} pontos'.format(self.posfinal, self.pontos)

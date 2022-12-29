@@ -12,9 +12,21 @@
         <a href="/brTalkingformula/construtores">Construtores</a>
         <a href="/brTalkingformula/corridas">Calendário</a>
         <a href="/brTalkingformula/noticias" >Notícias</a>
-        <a href="/brTalkingformula/resultados">Resultados</a>
+        <a href="/brTalkingformula/resultados/">Resultados</a>
     </div>
-      
+     
+    <div class="scrollmenu">
+    {% for epocaROW in epocas %}
+
+    <a href="/brTalkingformula/resultados/{{epocaROW.ano}}">{{epocaROW.ano}}</a>
+
+    {% endfor %}
+    </div>
+
+    {% if standings.all %}
+
+    <br>
+    
     <body>
         <table>
             <thead>
@@ -28,7 +40,7 @@
             <thead>
             <tbody>
                 <div class="wrapper">
-                    {% if standings.any %}
+                    
                    
                     {% for standingROW in standings %}
                     <tr>
@@ -47,11 +59,13 @@
                     </tr>
                     {% endfor %}
                    
-                    {% else %}
-                        <p>No pilotos to show.</p>
-                    {% endif %}
+    
+                    
                 </div>
             </tbody>
         </table>
   </body>
+  {% else %}
+        <p>Não há dados desta época</p>
+  {% endif %}
 </html>
