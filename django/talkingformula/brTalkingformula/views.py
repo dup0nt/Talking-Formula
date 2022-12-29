@@ -2,6 +2,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
 import numpy as np
+from django.db.models import Sum
+
 
 from .models import Circuito
 from .models import Corrida
@@ -91,7 +93,7 @@ def get_pontos(posfinal):
   except ResultadoPontos.DoesNotExist:
     return 0
 
-def resultados(request, epoca_ano=Epoca.objects.first().ano):
+def resultadosPilotos(request, epoca_ano=Epoca.objects.first().ano):
     template = loader.get_template('brTalkingformula/resultados.html')
     
     epocas = Epoca.objects.all()
@@ -124,7 +126,38 @@ def resultados(request, epoca_ano=Epoca.objects.first().ano):
 
     return HttpResponse(template.render(context, request))
 
+def resultadosConstrutores(request, epoca_ano=Epoca.objects.first().ano):
+    template = loader.get_template('brTalkingformula/resultados.html')
+    
+    epocas = Epoca.objects.all()
+    ultimas_corridas = Corrida.objects.filter(epoca_ano = epoca_ano).order_by('-ronda')
+    
+    for pilotoEquipa in PilotoEquipa.objects.all():
+        soma = 0
+        for resultado in resultados:
+            if (pilotoEquipa.piloto_pilotoid.pilotoid==resultado.piloto_pilotoid.pilotoid):
+                soma = soma + get_pontos(resultado.posfinal)
+        standings = np.vstack([standings, [pilotoEquipa, soma]]) 
+    
+    resultados = []
+    for corrida in ultimas_corridas:
+        resultados_corrida = corrida.resultados_set.all()
+        resultados.extend(resultados_corrida)
+    
+    standings = [1,1]
 
+  
+
+    standings = standings[1:]
+    standings = standings[(standings[:, 1]).argsort()[::-1]]
+
+
+    context = {
+        'standings': standings,
+        'epocas' : epocas,
+    }
+
+    return HttpResponse(template.render(context, request))
     
 def corridas(request):
     template = loader.get_template('brTalkingformula/corridas.html')
