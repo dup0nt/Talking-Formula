@@ -17,21 +17,19 @@
     <head>
         <title>Talking Formula</title>
     </head>
-    <h3>circuitoid: {{circuito.circuitoid}}</h3>
-    <h3>nome: {{circuito.nome}}</h3>
-    <h3>criadoem: {{circuito.criadoem}}</h3>
-    <h3>comprimento: {{circuito.comprimento}}</h3>
-    <h3>curvas: {{circuito.curvas}}</h3>
 
-    
+    {% for construtor in construtores %}
+    <div>
+    <h3>construtorid: {{construtor.construtorid}}</h3>
+    <h3>nome: {{construtor.nome}}</h3>
+    <h3>nacionalidade: {{construtor.nacionalidade}}</h3>
+    <h3>nascimento: {{construtor.nascimento}}</h3>
+    {% endfor %}
+    </div>  
+
     <div class="box">
         <picture>
-            <img src={{circuito.foto}} alt={{circuitoROW.nome}}-{{circuitoROW.foto}} style="width:200px;">
+            <img src={{construtor.foto}} alt={{construtorROW.nome}}-{{construtorROW.foto}} style="width:200px;">
         </picture>
     </div>
-
-</div>
-
-    
-
 </html>

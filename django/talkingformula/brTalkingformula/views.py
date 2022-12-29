@@ -157,6 +157,13 @@ def resultadosConstrutores(request, epoca_ano=Epoca.objects.first().ano):
         'epocas' : epocas,
     }
 
+def construtores(request):
+    template = loader.get_template('brTalkingformula/construtores.html')
+    construtores = Construtor.objects.all()
+    context = {
+        'construtores' : construtores
+    }
+    
     return HttpResponse(template.render(context, request))
     
 def corridas(request):
