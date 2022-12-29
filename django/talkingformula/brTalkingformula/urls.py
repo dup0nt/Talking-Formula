@@ -24,7 +24,7 @@ urlpatterns = [
 
 
     #Resultados
-    path('resultados/', views.resultados, name='resultados')
-
+    path('resultados/', views.resultados, name='resultados'),
+    path('resultados/<int:epoca_ano>', views.resultados, name='resultados'), 
 ]
 

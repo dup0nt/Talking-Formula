@@ -91,14 +91,13 @@ def get_pontos(posfinal):
   except ResultadoPontos.DoesNotExist:
     return 0
 
-def resultados(request):
+def resultados(request, epoca_ano=Epoca.objects.first().ano):
     template = loader.get_template('brTalkingformula/resultados.html')
     
-    epoca = Epoca.objects.order_by('-ano')[0]
-    ultimas_corridas = Corrida.objects.filter(epoca_ano = epoca).order_by('-ronda')
+    epocas = Epoca.objects.all()
+    ultimas_corridas = Corrida.objects.filter(epoca_ano = epoca_ano).order_by('-ronda')
     
-    #quero dicionário com {piloto, pontos;
-    #                           }
+    
  
     resultados = []
     for corrida in ultimas_corridas:
@@ -113,20 +112,14 @@ def resultados(request):
             if (pilotoEquipa.piloto_pilotoid.pilotoid==resultado.piloto_pilotoid.pilotoid):
                 soma = soma + get_pontos(resultado.posfinal)
         standings = np.vstack([standings, [pilotoEquipa, soma]]) 
-    """
-    for piloto in Piloto.objects.all():
-        soma = 0
-        for resultado in resultados:
-            if (piloto.pilotoid==resultado.piloto_pilotoid.pilotoid):
-                soma = soma + get_pontos(resultado.posfinal)
-        standings = np.vstack([standings, [piloto, soma]]) 
-    """
+
     standings = standings[1:]
     standings = standings[(standings[:, 1]).argsort()[::-1]]
 
 
     context = {
-        'standings': standings
+        'standings': standings,
+        'epocas' : epocas,
     }
 
     return HttpResponse(template.render(context, request))

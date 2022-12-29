@@ -140,3 +140,24 @@ body{
   font-size: 17px;
   font-family: formulaonefont;
 }
+
+div.scrollmenu {
+  background-color: rgba(135, 135, 135, 0.467);
+  overflow: auto;
+  white-space: nowrap;
+  font-size: larger;
+  font-style: formulaonefont;
+  text-align: center;
+}
+
+div.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  background-color: #777;
+}

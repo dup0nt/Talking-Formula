@@ -42,12 +42,16 @@
 
 
 <div class="card-body">
-
+    {% if novo_comentario %}
+    <div class="alert alert-success" role="alert">
+        Boas discussões!
+    </div>
+    {% else %}
     <h3>Leave a comment</h3>
     <form method="post" style="margin-top: 1.3em;">
       {{ comentario_form.as_p }}
       {% csrf_token %}
       <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
     </form>
-
+    {% endif %}
   </div>
