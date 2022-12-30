@@ -19,19 +19,30 @@
     <head>
         <title>Talking Formula</title>
     </head>
-    <h3>ronda: {{corrida.ronda}}</h3>
-    <h3>nome: {{corrida.nome}}</h3>
-    <h3>voltas: {{corrida.voltas}}</h3>
-    <h3>ocorreEm: {{corrida.ocorreem}}</h3>
-    <h3>horas: {{corrida.horas}}</h3>
-    <h3>temperatura: {{corrida.temperatura}}</h3>
-    <h3>temperaturacircuito: {{corrida.temperaturacircuito}}</h3>
-    <h3>precipitacao: {{corrida.precipitacao}}</h3>
-    <h3>humidade: {{corrida.humidade}}</h3>
-    <h3>exposicaosolar: {{corrida.exposicaosolar}}</h3>
-    <h3>epoca_ano: {{corrida.epoca_ano.ano}}</h3>
-    <h3>circuito_circuitoid: {{corrida.circuito_circuitoid}}</h3>
+    
 
+    <div class="wrapper">
+        <div class="left">  
+            <h1>{{corrida.nome}}, {{corrida.epoca_ano.ano}}</h1>
+            <h6>Voltas: {{corrida.voltas}}</h6>
+            <h6>Data: {{corrida.ocorreem}}</h6>
+            <h6>Horas: {{corrida.horas}}</h6>
+            <h6>Temperatura: {{corrida.temperatura}}</h6>
+            <h6>Temperatura Circuito: {{corrida.temperaturacircuito}}</h6>
+            <h6>Precipitacao: {{corrida.precipitacao}}</h6>
+            <h6>Humidade: {{corrida.humidade}}</h6>
+            <h6>Exposição Solar: {{corrida.exposicaosolar}}</h6>
+        </div>
+        <div class="right">
+          <picture>
+            <img
+              src="{{corrida.foto}}"
+              alt="{{corrida.nome}}-{{corrida.foto}}"
+              style="height: 250px"
+            />
+          </picture>
+        </div>
+      </div>
 
 </div>
     {% if resultado.all %}
