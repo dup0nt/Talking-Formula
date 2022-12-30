@@ -95,8 +95,9 @@ class Comentario(models.Model):
     comentarioid = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=80)
     corpo = models.CharField(max_length=2000)
-    criadoem = models.DateField()
-    noticia_noticiaid = models.ForeignKey('Noticia', models.CASCADE, db_column='noticia_noticiaid')
+    criadoem = models.DateTimeField(auto_now_add=True)
+    noticia_noticiaid = models.IntegerField()
+    #ForeignKey('Noticia', models.CASCADE, db_column='noticia_noticiaid')
 
     class Meta:
         managed = False
@@ -106,7 +107,7 @@ class Comentario(models.Model):
     
     def __str__(self):
         return 'Comentado por {} a {}'.format(self.nome, self.criadoem)
-
+    
 class Construtor(models.Model):
     construtorid = models.BigAutoField(primary_key=True)
     nome = models.CharField(max_length=512, blank=True)
@@ -230,7 +231,7 @@ class Noticia(models.Model):
         managed = False
         db_table = 'noticia'
         ordering = ['-criadoem'] 
-
+    
     def __str__(self):
         return '{} publicado a {}'.format(self.titulo, self.criadoem)
 
@@ -279,6 +280,7 @@ class Resultados(models.Model):
 
     def __str__(self):
         return '{} é {} na corrida {} da epoca {}'.format(self.piloto_pilotoid.nome, self.posfinal, self.corrida_ronda.circuito_circuitoid.nome, self.corrida_ronda.epoca_ano.ano)
+
 
 """
 class Resultados(models.Model):

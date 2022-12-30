@@ -1,35 +1,48 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'XXX.css' %}">
-    <div class="topnav">
-        <a href="/brTalkingformula/" class="split">Talking <b><i>Formula 1</i></b></a>
-        <a href="/brTalkingformula/pilotos">Pilotos</a>
-        <a href="/brTalkingformula/construtores">Construtores</a>
-        <a href="/brTalkingformula/corridas">Calendário</a>
-        <a href="/brTalkingformula/noticias" >Notícias</a>
-        <a href="/brTalkingformula/resultados">Resultados</a>
+  <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}" />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="{% static 'construtores_style.css' %}"
+  />
+
+  <div class="topnav">
+    <a href="/brTalkingformula/" class="split"
+      >Talking <b><i>Formula 1</i></b></a
+    >
+    <a href="/brTalkingformula/pilotos">Pilotos</a>
+    <a href="/brTalkingformula/construtores">Construtores</a>
+    <a href="/brTalkingformula/corridas">Calendário</a>
+    <a href="/brTalkingformula/noticias">Notícias</a>
+    <a href="/brTalkingformula/resultados">Resultados</a>
+  </div>
+
+  <head>
+    <title>Talking Formula</title>
+  </head>
+
+  <div class="wrapper">
+    {% for equipaROW in equipas %}
+    <div class="left">
+      <h1>{{equipaROW.construtor_construtorid.nome}}</h1>
+      <h3>Nacionalidade: {{equipaROW.construtor_construtorid.nacionalidade}}</h3>
+      <h3>Fundado: {{equipaROW.construtor_construtorid.criadoem}}</h3>
+      <h2>Season {{equipaROW.epoca_ano.ano}}</h2>
+      <h4>Chefe Técnico: {{equipaROW.chefe}}</h4>
+      <h4>Chassis: {{equipaROW.chassis}}</h4>
     </div>
-
-    <head>
-        <title>Talking Formula</title>
-    </head>
-
-    {% for construtor in construtores %}
-    <div>
-    <h3>construtorid: {{construtor.construtorid}}</h3>
-    <h3>nome: {{construtor.nome}}</h3>
-    <h3>nacionalidade: {{construtor.nacionalidade}}</h3>
-    <h3>nascimento: {{construtor.nascimento}}</h3>
+    <div class="right">
+      <picture>
+        <img
+          src="{{equipaROW.foto_carro}}"
+          alt="{{equipaROW.nome}}-{{equipaROW.foto_carro}}"
+          style="height: 250px"
+        />
+      </picture>
+    </div>
     {% endfor %}
-    </div>  
-
-    <div class="box">
-        <picture>
-            <img src={{construtor.foto}} alt={{construtorROW.nome}}-{{construtorROW.foto}} style="width:200px;">
-        </picture>
-    </div>
+  </div>
 </html>

@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.template import loader
 import numpy as np
-from django.db.models import Sum
+
 
 
 from .models import Circuito
@@ -19,32 +19,24 @@ from .models import Comentario
 
 from .forms import ComentarioForm
 
+from .standings import calc_resultadosPilotos
 # Create your views here.
 
 def index(request):
     template = loader.get_template('brTalkingformula/index.html')
     ultima_noticia = Noticia.objects.latest('criadoem')
-    ultima_epoca = Epoca.objects.order_by('-ano')[0]
 
-    ultimas_corridas = Corrida.objects.order_by('-epoca_ano').order_by('-ronda')
-
-    resultados = []
-    for corrida in ultimas_corridas:
-        # Retrieve the Resultados objects for the Corrida object
-        resultados_corrida = corrida.resultados_set.all()
-        # Append the Resultados objects to the list
-        resultados.extend(resultados_corrida)
-
-    
-    ultima_corrida = ultimas_corridas[0]
-    ultimo_resultados = Resultados.objects.filter(corrida_ronda = ultima_corrida.ronda).order_by('posfinal')[:3]
+    standings = calc_resultadosPilotos()
+    ultima_corrida = Corrida.objects.latest('ocorreem')
+    ultimo_resultados = Resultados.objects.filter(corrida_ronda = ultima_corrida.ronda)[:3]
     
     
 
     context = {
         'noticia': ultima_noticia,
+        'ultima_corrida': ultima_corrida,
         'ultimo_resultado': ultimo_resultados,
-        'stadings' : resultados
+        'standings' : standings,
     }
     return HttpResponse(template.render(context, request))
 
@@ -81,79 +73,32 @@ def pilotosDetails(request, pilotoid):
     except Piloto.DoesNotExist:
         raise Http404("Guitar does not exist")
     return HttpResponse(template.render(context, request))
-
     
 
 
 def resultadosPilotos(request, epoca_ano=Epoca.objects.first().ano):
     template = loader.get_template('brTalkingformula/resultados.html')
-    
     epocas = Epoca.objects.all()
-    ultimas_corridas = Corrida.objects.filter(epoca_ano = epoca_ano).order_by('-ronda')
     
-    
- 
-    resultados = []
-    for corrida in ultimas_corridas:
-        resultados_corrida = corrida.resultados_set.all()
-        resultados.extend(resultados_corrida)
-    
-    standings = [1,1]
+    standings = np.empty((0, 2), dtype=object)
+    only_standings = np.empty(0, dtype=int)
 
-    for pilotoEquipa in PilotoEquipa.objects.all():
-        soma = 0
-        for resultado in resultados:
-            if (pilotoEquipa.piloto_pilotoid.pilotoid==resultado.piloto_pilotoid.pilotoid):
-                soma = soma + resultado.posfinal.pontos
-        standings = np.vstack([standings, [pilotoEquipa, soma]]) 
 
-    standings = standings[1:]
-    standings = standings[(standings[:, 1]).argsort()[::-1]]
-
+    standings = calc_resultadosPilotos(epoca_ano)
 
     context = {
         'standings': standings,
         'epocas' : epocas,
     }
-
+    
     return HttpResponse(template.render(context, request))
-
-def resultadosConstrutores(request, epoca_ano=Epoca.objects.first().ano):
-    template = loader.get_template('brTalkingformula/resultados.html')
-    
-    epocas = Epoca.objects.all()
-    ultimas_corridas = Corrida.objects.filter(epoca_ano = epoca_ano).order_by('-ronda')
-    
-    for pilotoEquipa in PilotoEquipa.objects.all():
-        soma = 0
-        for resultado in resultados:
-            if (pilotoEquipa.piloto_pilotoid.pilotoid==resultado.piloto_pilotoid.pilotoid):
-                soma = soma + get_pontos(resultado.posfinal)
-        standings = np.vstack([standings, [pilotoEquipa, soma]]) 
-    
-    resultados = []
-    for corrida in ultimas_corridas:
-        resultados_corrida = corrida.resultados_set.all()
-        resultados.extend(resultados_corrida)
-    
-    standings = [1,1]
-
-  
-
-    standings = standings[1:]
-    standings = standings[(standings[:, 1]).argsort()[::-1]]
-
-
-    context = {
-        'standings': standings,
-        'epocas' : epocas,
-    }
 
 def construtores(request):
     template = loader.get_template('brTalkingformula/construtores.html')
-    construtores = Construtor.objects.all()
+    #construtores = Construtor.objects.all()
+    equipa = Equipa.objects.all()
     context = {
-        'construtores' : construtores
+        'equipas' : equipa
     }
     
     return HttpResponse(template.render(context, request))
@@ -222,6 +167,7 @@ def noticiasDetails(request, noticiaid):
 
             # Create Comment object but don't save to database yet
             novo_comentario = comentario_form.save(commit=False)
+            
             # Assign the current post to the comment
             novo_comentario.noticia_noticiaid = noticia.noticiaid
             # Save the comment to the database

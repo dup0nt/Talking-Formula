@@ -1,6 +1,4 @@
 from .models import Comentario
-from .models import Epoca
-
 from django import forms
 
 class ComentarioForm(forms.ModelForm):

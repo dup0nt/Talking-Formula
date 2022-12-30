@@ -3,8 +3,9 @@
 
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'resultados_style.css' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'resultados_style.css' %}">
 
     <div class="topnav">
         <a href="/brTalkingformula/" class="split">Talking <b><i>Formula 1</i></b></a>
@@ -14,7 +15,11 @@
         <a href="/brTalkingformula/noticias" >Notícias</a>
         <a href="/brTalkingformula/resultados/">Resultados</a>
     </div>
-     
+
+    <br>
+    <br>
+    <br>
+    <body>
     <div class="scrollmenu">
     {% for epocaROW in epocas %}
 
@@ -26,44 +31,41 @@
     {% if standings.all %}
 
     <br>
-    
     <body>
-        <table>
-            <thead>
-            <tr>
-                <th>POS</th>
-                <th>Piloto</th>
-                <th>Nacionalidade</th>
-                <th>Construtor</th>
-                <th>Pontos</th>
-            </tr>
-            <thead>
-            <tbody>
-                <div class="wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>POS</th>
+                    <th>Piloto</th>
+                    <th>Nacionalidade</th>
+                    <th>Construtor</th>
+                    <th>Pontos</th>
+                </tr>
+                <thead>
+                <tbody>
+                    <div class="wrapper">
+                          {% for standingROW in standings %}
+                        <tr>
+                            <td> {{ forloop.counter }}</td>
+                            {% for item in standingROW %}
+                                {% with counter=forloop.counter0 %}
+                                    {% if counter == 0 %}
+                                        <td>{{ item.piloto_pilotoid.nome }}</td>
+                                        <td>{{ item.piloto_pilotoid.nacionalidade }}</td> 
+                                        <td>{{ item.equipa_equipaid.construtor_construtorid.nome }}</td>
+                                    {% elif counter == 1 %}
+                                        <td class=>{{ item }}</td>
+                                    {% endif %}
+                                {% endwith %}
+                                {% endfor %}
+                        </tr>
+                        {% endfor %}
                     
-                   
-                    {% for standingROW in standings %}
-                    <tr>
-                        <td> {{ forloop.counter }}</td>
-                        {% for item in standingROW %}
-                            {% with counter=forloop.counter0 %}
-                                {% if counter == 0 %}
-                                    <td>{{ item.piloto_pilotoid.nome }}</td>
-                                    <td>{{ item.piloto_pilotoid.nacionalidade }}</td> 
-                                    <td>{{ item.equipa_equipaid.construtor_construtorid.nome }}</td>
-                                {% elif counter == 1 %}
-                                    <td class=>{{ item }}</td>
-                                {% endif %}
-                            {% endwith %}
-                            {% endfor %}
-                    </tr>
-                    {% endfor %}
-                   
-    
-                    
-                </div>
-            </tbody>
-        </table>
+        
+                        
+                    </div>
+                </tbody>
+            </table>
   </body>
   {% else %}
         <p>Não há dados desta época</p>

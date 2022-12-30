@@ -2,9 +2,10 @@
 
 
 <!DOCTYPE html>
-<html>
+<html lang="pt">
     <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'XXX.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'noticia_style.css' %}">
+
     <div class="topnav">
         <a href="/brTalkingformula/" class="split">Talking <b><i>Formula 1</i></b></a>
         <a href="/brTalkingformula/pilotos">Pilotos</a>
@@ -18,20 +19,28 @@
         <title>Talking Formula</title>
     </head>
 
-    <h3>noticiaid: {{noticia.noticiaid}}</h3>
-    <h3>titulo: {{noticia.titulo}}</h3>
-    <h3>corpo: {{noticia.corpo}}</h3>
-    <h3>criadoem: {{noticia.criadoem}}</h3>
+  <body>
 
-<div class="box">
+    <div class="wrapper">
+    <h1>{{noticia.titulo}}</h1>
+    <small>Publicado a: {{noticia.criadoem}}</small>
+    <div class="corpo">{{noticia.corpo}}</div>
+
+
+    <div>
         <picture>
-            <img src={{noticia.foto}} alt={{noticiaoROW.nome}}-{{noticiaROW.foto}} style="width:200px;">
+            <img src={{noticia.foto}} alt={{noticiaoROW.nome}}-{{noticiaROW.foto}} style="width:auto;">
+            <br>
+            <label>Fotografia tirada após o final da corrida. ®</label>
         </picture>
-</div>
+        
+    </div>
 
+    <br>
+    <h3>Comentários</h3>
 {% for comment in comentarios %}
 <div class="comments" style="padding: 10px;">
-  <p class="font-weight-bold">
+  <p class="bold">
     {{ comment.nome }}
     <span class=" text-muted font-weight-normal">
       {{ comment.criadoem }}
@@ -56,3 +65,7 @@
     </form>
     {% endif %}
   </div>
+
+  </body>  
+</div>
+  <html>

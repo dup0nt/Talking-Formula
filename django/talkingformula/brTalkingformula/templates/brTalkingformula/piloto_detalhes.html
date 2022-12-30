@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html>
     <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'XXX.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'construtores_style.css' %}">
+
     <div class="topnav">
         <a href="/brTalkingformula/" class="split">Talking <b><i>Formula 1</i></b></a>
         <a href="/brTalkingformula/pilotos">Pilotos</a>
@@ -17,10 +18,22 @@
     <head>
         <title>Talking Formula</title>
     </head>
-    <h3>pilotoid: {{piloto.pilotoid}}</h3>
-    <h3>nome: {{piloto.nome}}</h3>
-    <h3>nacionalidade: {{piloto.nacionalidade}}</h3>
-    <h3>nascimento: {{piloto.nascimento}}</h3>
 
+    <div class="wrapper">
+        <div class="left">
+          <h1>{{piloto.nome}}</h1>
+          <h3>Nacionalidade: {{piloto.nacionalidade}}</h3>
+          <h3>Nascimento: {{piloto.nascimento}}</h3>
+        </div>
+        <div class="right">
+          <picture>
+            <img
+              src="{{piloto.foto}}"
+              alt="{{piloto.nome}}-{{piloto.foto}}"
+              style="height: 250px"
+            />
+          </picture>
+        </div>
+      </div>
 
 </html>
