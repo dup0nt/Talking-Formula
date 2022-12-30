@@ -96,8 +96,7 @@ class Comentario(models.Model):
     nome = models.CharField(max_length=80)
     corpo = models.CharField(max_length=2000)
     criadoem = models.DateTimeField(auto_now_add=True)
-    noticia_noticiaid = models.IntegerField()
-    #ForeignKey('Noticia', models.CASCADE, db_column='noticia_noticiaid')
+    noticia_noticiaid = models.ForeignKey('Noticia', models.CASCADE, db_column='noticia_noticiaid')
 
     class Meta:
         managed = False

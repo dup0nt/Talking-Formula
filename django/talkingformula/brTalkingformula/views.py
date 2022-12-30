@@ -169,7 +169,7 @@ def noticiasDetails(request, noticiaid):
             novo_comentario = comentario_form.save(commit=False)
             
             # Assign the current post to the comment
-            novo_comentario.noticia_noticiaid = noticia.noticiaid
+            novo_comentario.noticia_noticiaid = noticia
             # Save the comment to the database
             novo_comentario.save()
     else:

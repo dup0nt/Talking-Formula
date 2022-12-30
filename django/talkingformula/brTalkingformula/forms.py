@@ -1,4 +1,5 @@
 from .models import Comentario
+from .models import Noticia
 from django import forms
 
 class ComentarioForm(forms.ModelForm):
