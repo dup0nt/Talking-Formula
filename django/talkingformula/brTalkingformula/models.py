@@ -140,9 +140,9 @@ class Corrida(models.Model):
         managed = False
         db_table = 'corrida'
         ordering = ['ocorreem']
-    
+
     def __str__(self):
-        return self.nome
+        return "{}".format(self.nome)
 
 
 class DjangoAdminLog(models.Model):

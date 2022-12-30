@@ -41,15 +41,17 @@
 
         {% for resultadoPIL in ultimo_resultado %}
         <ol>
-          <div class="pos{{resultadoPIL.posfinal.posfinal}}">
-            <a
+          <a
               id="logo"
               href="/brTalkingformula/pilotos/{{resultadoPIL.piloto_pilotoid.pilotoid}}"
             >
+          <div class="pos{{resultadoPIL.posfinal.posfinal}}">
+            
               {{resultadoPIL.posfinal.posfinal}}.
-              {{resultadoPIL.piloto_pilotoid.nome}}</a
-            >
+              {{resultadoPIL.piloto_pilotoid.nome}}
           </div>
+          </a
+            >
 
           {% endfor %} {% for resultadoPIL in ultimo_resultado %}
         </ol>
@@ -58,9 +60,10 @@
         {% endif %}
       </div>
 
-      
+
       <div class="left_bblock">
-        <h1><a id="logo" href="/brTalkingformula/noticias/{{noticia.noticiaid}}">{{ noticia.titulo }}</a></h1>
+        <a id="logo" href="/brTalkingformula/noticias/{{noticia.noticiaid}}">
+        <h1>{{ noticia.titulo }}</h1>
         <small> {{noticia.criadoem}}</small>
         <br />
         <img src="{{ noticia.foto }}" alt="{{ noticia.titulo }}" />
@@ -68,7 +71,9 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;">{{ noticia.corpo }}</p>
+        </a>
       </div>
+
       <div class="right_sblock">
         <div class="gp", style="font-size: 24px; text-align: center;">
           
