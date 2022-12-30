@@ -64,9 +64,21 @@
         <small> {{noticia.criadoem}}</small>
         <br />
         <img src="{{ noticia.foto }}" alt="{{ noticia.titulo }}" />
-        <p>{{ noticia.corpo }}</p>
+        <p style="  max-width: 2000px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;">{{ noticia.corpo }}</p>
       </div>
       <div class="right_sblock">
+        <div class="gp", style="font-size: 24px; text-align: center;">
+          
+          <a
+            id="logo"
+            href="/brTalkingformula/corrida/resultados"
+          >
+          Standings Pilotos
+          </a>
+        </div>
         <table>
             <thead>
             <tr>
