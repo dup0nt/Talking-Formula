@@ -7,8 +7,6 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-
-
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
@@ -279,27 +277,6 @@ class Resultados(models.Model):
 
     def __str__(self):
         return '{} é {} na corrida {} da epoca {}'.format(self.piloto_pilotoid.nome, self.posfinal, self.corrida_ronda.circuito_circuitoid.nome, self.corrida_ronda.epoca_ano.ano)
-
-
-"""
-class Resultados(models.Model):
-    resultadoid = models.AutoField(primary_key=True)
-    posinicio = models.IntegerField()
-    posfinal = models.IntegerField(blank=True, null=True)
-    tempototal = models.IntegerField(blank=True, null=True)
-    voltarapida = models.IntegerField(blank=True, null=True)
-    corrida_ronda = models.ForeignKey(Corrida, models.DO_NOTHING, db_column='corrida_ronda')
-    piloto_pilotoid = models.ForeignKey(Piloto, models.DO_NOTHING, db_column='piloto_pilotoid')
-
-    class Meta:
-        managed = False
-        db_table = 'resultados'
-        unique_together = (('resultadoid', 'corrida_ronda', 'piloto_pilotoid'),)
-        
-
-    def __str__(self):
-        return '{} é {} na corrida {} da epoca {}'.format(self.piloto_pilotoid.nome, self.posfinal, self.corrida_ronda.circuito_circuitoid.nome, self.corrida_ronda.epoca_ano.ano)
-"""
 
 
 class ResultadoPontos(models.Model):

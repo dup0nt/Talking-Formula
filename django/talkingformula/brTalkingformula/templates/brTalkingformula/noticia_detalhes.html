@@ -39,29 +39,27 @@
     <br>
     <h3>Comentários</h3>
 {% for comment in comentarios %}
-<div class="comments" style="padding: 10px;">
+<div class="comentarios" style="padding: 10px;">
   <p class="bold">
     {{ comment.nome }}
-    <span class=" text-muted font-weight-normal">
-      {{ comment.criadoem }}
-    </span>
+    <div style="font-size: 12px;">{{ comment.criadoem }} </div> 
   </p>
   {{ comment.corpo | linebreaks }}
 </div>
 {% endfor %}
 
 
-<div class="card-body">
+<div>
     {% if novo_comentario %}
-    <div class="alert alert-success" role="alert">
+    <div>
         Boas discussões!
     </div>
     {% else %}
-    <h3>Leave a comment</h3>
-    <form method="post" style="margin-top: 1.3em;">
+    <h3>Participe na discussão:</h3>
+    <form method="post" style="margin-top: 5px;">
       {{ comentario_form.as_p }}
       {% csrf_token %}
-      <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+      <button type="submit">Comentar</button>
     </form>
     {% endif %}
   </div>

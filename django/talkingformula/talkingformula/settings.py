@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-import pymysql
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,9 +51,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
-pymysql.install_as_MySQLdb()
-#python manage.py inspectdb > brTalkingformula/models.py     
+    
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -118,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "pt-pt"
 
 TIME_ZONE = "UTC"
 

@@ -24,6 +24,7 @@
     <div class="wrapper">
         <div class="left">  
             <h1>{{corrida.nome}}, {{corrida.epoca_ano.ano}}</h1>
+            <h4>Circuito: <a href="/brTalkingformula/circuitos/{{corrida.circuito_circuitoid.circuitoid}}/">{{corrida.circuito_circuitoid.nome}}</a></h4>
             <h4>Voltas: {{corrida.voltas}}</h4>
             <h4>Data: {{corrida.ocorreem}}</h4>
             <h4>Horas: {{corrida.horas}}</h4>
@@ -31,6 +32,7 @@
 
         </div>
         <div class="right">
+            <br>
             <br>
             <br>
             <br>
@@ -64,7 +66,7 @@
                    
                     {% for resultadoROW in resultado %}
                     <tr>
-                        <td> {{ resultadoROW.posfinal.posfinal }}</td>
+                        <td> {{resultadoROW.posfinal.posfinal}}</td>
                         <td> {{resultadoROW.piloto_pilotoid.nome}}</td>
                         <td> {{resultadoROW.piloto_pilotoid.nacionalidade}}</td>
                         <td> {{resultadoROW.voltarapida}}</td>

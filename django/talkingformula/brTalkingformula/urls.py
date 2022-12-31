@@ -20,7 +20,7 @@ urlpatterns = [
 
     #Circuitos
     path('circuitos', views.circuitos, name='circuitos'),
-    path('circuitos/<int:circuitoid>/', views.circuito, name='circuitoDetails'),
+    path('circuitos/<int:circuitoid>/', views.circuitoDetails, name='circuitoDetails'),
 
 
     #Noticias

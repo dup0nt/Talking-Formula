@@ -24,14 +24,12 @@ from .standings import calc_resultadosPilotos
 
 def index(request):
     template = loader.get_template('brTalkingformula/index.html')
+    
     ultima_noticia = Noticia.objects.latest('criadoem')
-
     standings = calc_resultadosPilotos()
     ultima_corrida = Corrida.objects.latest('ocorreem')
     ultimo_resultados = Resultados.objects.filter(corrida_ronda = ultima_corrida.ronda)[:3]
     
-    
-
     context = {
         'noticia': ultima_noticia,
         'ultima_corrida': ultima_corrida,
@@ -50,9 +48,16 @@ def pilotos(request):
     return HttpResponse(template.render(context, request))
 
 
-def circuito(request, circuitoid):
+def circuitoDetails(request, circuitoid):
     template = loader.get_template('brTalkingformula/circuito.html')
-    items = Circuito.objects.get(circuitoid = circuitoid)                       #lista dos circuitos
+    
+    try:
+        items = Circuito.objects.get(circuitoid = circuitoid)    
+        
+    except Circuito.DoesNotExist:
+        raise Http404("Circuito does not exist")
+
+
     context = {
         'circuito':items
     }
@@ -63,7 +68,6 @@ def circuito(request, circuitoid):
 
 def pilotosDetails(request, pilotoid):
     template = loader.get_template('brTalkingformula/piloto_detalhes.html')
-    
 
     try:
         piloto = Piloto.objects.get(pilotoid = pilotoid)
@@ -71,7 +75,7 @@ def pilotosDetails(request, pilotoid):
             'piloto' : piloto
             }
     except Piloto.DoesNotExist:
-        raise Http404("Guitar does not exist")
+        raise Http404("Piloto does not exist")
     return HttpResponse(template.render(context, request))
     
 
