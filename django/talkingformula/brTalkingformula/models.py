@@ -198,7 +198,7 @@ class Epoca(models.Model):
         ordering = ['-ano']
 
     def __str__(self):
-        return self.ano
+        return str(self.ano)
 
 
 class Equipa(models.Model):

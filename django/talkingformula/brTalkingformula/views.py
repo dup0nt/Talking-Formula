@@ -122,8 +122,6 @@ def corridaDetails(request, ronda):
             
         except Resultados.DoesNotExist:
             raise Http404("Resultado não existe")
-
-        print(pontos[0])
         
         context = {
             'corrida' : corrida,
